@@ -12,6 +12,9 @@ for key in data:
 while True:
     answer = input("insert 1 to add a chapter. insert 2 to continue without adding")
     if answer != "1":
+        print("now you have the following chapters")
+        for key in data:
+            print(key)
         break
     else:
         name = input("the chapters name?")
