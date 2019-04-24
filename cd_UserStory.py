@@ -39,7 +39,6 @@ def openTheDescription(category):
 
 
 
-
 def main():
     calculusDictionary = loadCalculusDictionary()
     calculusDictionary = chooseTheChapter(calculusDictionary)
