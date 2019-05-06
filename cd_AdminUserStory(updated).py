@@ -18,53 +18,83 @@ def addChapters(chapters):
     for key in chapters:
         print(key)
     while True:
-        addornot = input("Do you want to add a chapter?")
-        if addornot == 'no':
+        addskpiclose = input("To add a chapter insert 'add', to skip type 'skip'")
+        if addskpiclose == 'skip':
             break
-        elif addornot == 'yes':
+        elif addskpiclose == 'add':
             name = input("the chapters name?")
             chapters[name] = {"definitions": {}, "theorems": {}, "laws": {}, "exercises": {}, "rules": {}}
             print("Now the Chapters are the following")
             for key in chapters:
                 print(key)
-
         else:
             print("please follow the orders")
     return chapters
 
 def addTopics(topics):
-    if input("do you want to add something to existing chapters?") == "yes":
-        for chapter in topics:
-            if input("do you want to modify " + chapter + "?") != "yes":
-                continue
-            else:
-                for category in topics[chapter]:
-                    while True:
-                        if input("Do you want to add another " + category + "?") != "yes":
-                            break
-                        else:
-                            newTopic = input("what is the name of the " + category + "?")
-                            topics[chapter][category][newTopic] = input("write a description for " + newTopic)
-
+    while True:
+        addskipclose = input("To add a topic insert 'add', to skip type 'skip'")
+        if addskipclose == 'add':
+            for chapter in topics:
+                while True:
+                    modifyorskip = input("To modify chapter " + chapter + "modify 'modify', to skip type 'skip'")
+                    if modifyorskip == 'skip':
+                        break
+                    elif modifyorskip == 'modify':
+                        for category in topics[chapter]:
+                            while True:
+                                addornot = input("To add another " + category + " type 'add', to skip type 'skip'")
+                                if addornot == 'skip':
+                                     break
+                                elif addornot == 'add':
+                                    newTopic = input("what is the name of the " + category + "?")
+                                    topics[chapter][category][newTopic] = input("write a description for " + newTopic)
+                                else:
+                                    print("please follow the orders")
+                    else:
+                        print("please follow the orders")
+        elif addskipclose == 'skip':
+            break
+        else:
+            print("please follow the orders")
     return topics
 
 def changeTopics(topics):
-    if input("do you want to change something in existing chapters?") == "yes":
-        for chapter in topics:
-            if input("do you want to change something in the chapter" + chapter + "?") != "yes":
-                continue
-            else:
-                for category in topics[chapter]:
-                    if input("do you want to change a " + category + "?") != "yes":
-                        continue
+    while True:
+        changeornot = input("To change something in existing chapters type 'change', to skip type 'skip'")
+
+        if changeornot == 'skip':
+            break
+        elif changeornot == 'change':
+            for chapter in topics:
+                while True:
+                    changeorskip = input("To change something in the chapter" + chapter + " type 'change', to skip type 'skip'")
+                    if changeorskip == 'skip':
+                        break
+                    elif changeorskip == 'change':
+                        for category in topics[chapter]:
+                            while True:
+                                changeorcontinue =  input("To change a " + category + " type 'change'")
+                                if changeorcontinue == 'skip':
+                                    break
+                                elif changeorcontinue == 'change':
+                                    for definition in topics[chapter][category]:
+                                        while True:
+                                            yesorno = input("To change definition " + definition + "? (answer 'yes' or 'no'")
+                                            if yesorno == "no":
+                                                break
+                                            elif yesorno == "yes":
+                                                print(definition)
+                                                print(topics[chapter][category][definition])
+                                                topics[chapter][category][definition] = input("write new description for" + definition)
+                                            else:
+                                                print("please follow the orders")
+                                else:
+                                    print("please follow the orders")
                     else:
-                        for definition in topics[chapter][category]:
-                            if input("do you want to change definition " + definition + "?") != "yes":
-                                continue
-                            else:
-                                print(definition)
-                                print(topics[chapter][category][definition])
-                                topics[chapter][category][definition] = input("write new description for" + definition)
+                        print("please follow the orders")
+        else:
+            print('please follow the orders')
     return topics
 
 
