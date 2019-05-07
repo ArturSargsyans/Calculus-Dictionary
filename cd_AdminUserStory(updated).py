@@ -5,97 +5,123 @@ def loadCalculusDictionary():
         chapters = json.load(data_file)
     return chapters
 
-
-def introduction():
+def introduciton(chapters):
     print("Hello dear Admin.\n\nWelcome to Calculus Dictionary. Here you can modify data you have for your application.\n")
-    startorclose = input("To start the work type 'go'. To exit type 'close'")
-    return startorclose
+    while True:
+        startorclose = input("To start working type 'continue', to exit type 'close'")
+        if (startorclose == 'continue' or startorclose == 'close'):
+            decisionandchapters = (startorclose, chapters)
+            break
+        else:
+            print("\nPLEASE FOLLOW THE INSTRUCTIONS!!!")
+    return decisionandchapters
 
 
 
 def addChapters(chapters):
-    print("Here are the existing chapters")
-    for key in chapters:
-        print(key)
+    print("Here are the chapters available\n")
+    for key in chapters[1]:
+        print(key, "\n")
     while True:
-        addskpiclose = input("To add a chapter insert 'add', to skip type 'skip'")
-        if addskpiclose == 'skip':
+        addChappterOrNot = input("To add a chapter type 'add', to skip this part type 'skip', to close the application type 'close'")
+        if addChappterOrNot == 'skip':
             break
-        elif addskpiclose == 'add':
+        elif addChappterOrNot == 'add':
             name = input("the chapters name?")
-            chapters[name] = {"definitions": {}, "theorems": {}, "laws": {}, "exercises": {}, "rules": {}}
-            print("Now the Chapters are the following")
-            for key in chapters:
-                print(key)
+            chapters[1][name] = {"definitions": {}, "theorems": {}, "laws": {}, "exercises": {}, "rules": {}}
+        elif addChappterOrNot == 'close':
+            break
         else:
-            print("please follow the orders")
-    return chapters
+            print("\nPLEASE FOLLOW THE INSTRUCTIONS!!!")
+        print("Now the Chapters are the following\n")
+        for key in chapters[1]:
+            print(key, "\n")
+    decisionandchapters = (addChappterOrNot, chapters[1])
+    return decisionandchapters
 
 def addTopics(topics):
     while True:
-        addskipclose = input("To add a topic insert 'add', to skip type 'skip'")
-        if addskipclose == 'add':
-            for chapter in topics:
-                while True:
-                    modifyorskip = input("To modify chapter " + chapter + "modify 'modify', to skip type 'skip'")
-                    if modifyorskip == 'skip':
-                        break
-                    elif modifyorskip == 'modify':
-                        for category in topics[chapter]:
-                            while True:
-                                addornot = input("To add another " + category + " type 'add', to skip type 'skip'")
-                                if addornot == 'skip':
-                                     break
-                                elif addornot == 'add':
-                                    newTopic = input("what is the name of the " + category + "?")
-                                    topics[chapter][category][newTopic] = input("write a description for " + newTopic)
-                                else:
-                                    print("please follow the orders")
-                    else:
-                        print("please follow the orders")
-        elif addskipclose == 'skip':
+        addTopicorNot = input("\nTo add something in existing chapters type 'add', to skip this part type 'skip', to exit type 'close'")
+        if addTopicorNot == 'skip':
             break
+        elif addTopicorNot == 'close':
+            break
+        elif addTopicorNot == 'add':
+            while True:
+                for chapter in topics[1]:
+                    print("\n", chapter, "\n")
+                chaptername = input("from the following chapters enter the name of a chapter you want to work with, if you are done type 'finish")
+                if chaptername == 'finish':
+                    break
+                elif chaptername not in topics[1]:
+                    print("\nTHERE IS NO SUCH CHAPTER!")
+                else:
+                    while True:
+                        for category in topics[1][chaptername]:
+                            print("\n", category, "\n")
+                        categoryname = input("now from the following categories write down the name of the one you want to add, if you are done type 'finish")
+                        if categoryname == 'finish':
+                            break
+                        elif categoryname not in topics[1][chaptername]:
+                            print("\nTHERE IS NO SUCH CATEGORY!")
+                        else:
+                            while True:
+
+                                for description in topics[1][chaptername][categoryname]:
+                                    print("\n", description, "\n")
+
+                                descriptionname = input("enter the name of the new " + categoryname + " if you are done type 'finish'")
+                                if descriptionname == 'finish':
+                                    break
+                                elif descriptionname in topics[1][chaptername][categoryname]:
+                                    print("\n That description already exists")
+                                else:
+                                    topics[1][chaptername][categoryname][descriptionname] = input("Now dear Admin, please type the description")
         else:
-            print("please follow the orders")
-    return topics
+            print("PLEASE FOLLOW THE INSTRUCTIONS!!")
+    decisionandchapters = (addTopicorNot, topics[1])
+    return decisionandchapters
 
 def changeTopics(topics):
     while True:
-        changeornot = input("To change something in existing chapters type 'change', to skip type 'skip'")
-
-        if changeornot == 'skip':
+        changeorNot = input("To change something in existing chapters type 'change', to skip this part type 'skip', to exit type 'close'")
+        if (changeorNot == 'skip' or changeorNot == 'close'):
             break
-        elif changeornot == 'change':
-            for chapter in topics:
-                while True:
-                    changeorskip = input("To change something in the chapter" + chapter + " type 'change', to skip type 'skip'")
-                    if changeorskip == 'skip':
-                        break
-                    elif changeorskip == 'change':
-                        for category in topics[chapter]:
+        elif changeorNot == 'change':
+            while True:
+                for chapter in topics[1]:
+                    print("\n", chapter, "\n")
+                chaptername = input("from the following chapters enter the name of a chapter you want to work with, if you are done type 'finish")
+                if chaptername == 'finish':
+                    break
+                elif chaptername not in topics[1]:
+                    print("\nPLEASE ENTER THE NAME OF A CHAPTER THAT EXISTS")
+                else:
+                    while True:
+                        for category in topics[1][chaptername]:
+                            print("\n", category, "\n")
+                        categoryname = input("now from the following categories write down the name of the one you want to add, if you are done type 'finish'")
+                        if categoryname == 'finish':
+                            break
+                        elif categoryname not in topics[1][chaptername]:
+                            print("\nTHERE IS NO SUCH CATEGORY!")
+                        else:
                             while True:
-                                changeorcontinue =  input("To change a " + category + " type 'change'")
-                                if changeorcontinue == 'skip':
+                                for description in topics[1][chaptername][categoryname]:
+                                    print("\n", description, "\n")
+                                descriptionname = input("now from the following enter the name of description you want to modify, if you are done type 'finish'")
+                                if descriptionname == 'finish':
                                     break
-                                elif changeorcontinue == 'change':
-                                    for definition in topics[chapter][category]:
-                                        while True:
-                                            yesorno = input("To change definition " + definition + "? (answer 'yes' or 'no'")
-                                            if yesorno == "no":
-                                                break
-                                            elif yesorno == "yes":
-                                                print(definition)
-                                                print(topics[chapter][category][definition])
-                                                topics[chapter][category][definition] = input("write new description for" + definition)
-                                            else:
-                                                print("please follow the orders")
+                                elif descriptionname not in topics[1][chaptername][categoryname]:
+                                    print("\nthat ", descriptionname, " does not exist")
                                 else:
-                                    print("please follow the orders")
-                    else:
-                        print("please follow the orders")
-        else:
-            print('please follow the orders')
-    return topics
+                                    print(topics[1][chaptername][categoryname][descriptionname])
+                                    topics[1][chaptername][categoryname][descriptionname] = input("enter the new description")
+    decisionandchapters = (changeorNot, topics[1])
+
+
+
+    return decisionandchapters
 
 
 def save(data):
@@ -106,18 +132,19 @@ def save(data):
 
 def main():
     calculusDictionary = loadCalculusDictionary()
-    while True:
-        startorclose = introduction()
-        if startorclose == 'go':
-            calculusDictionary = addChapters(calculusDictionary)
-            calculusDictionary = addTopics(calculusDictionary)
-            calculusDictionary = changeTopics(calculusDictionary)
-            save(calculusDictionary)
-            break
-        elif startorclose == 'close':
-            print("The work is finished")
-            break
+    calculusDictionary = introduciton(calculusDictionary)
+    if calculusDictionary[0] == 'close':
+        save(calculusDictionary[1])
+    else:
+        calculusDictionary = addChapters(calculusDictionary)
+        if calculusDictionary[0] == 'close':
+            save(calculusDictionary[1])
         else:
-            print("please follow the orders")
+            calculusDictionary = addTopics(calculusDictionary)
+            if calculusDictionary[0] == 'close':
+                save(calculusDictionary[1])
+            else:
+                calculusDictionary = changeTopics(calculusDictionary)
+                save(calculusDictionary[1])
 
 main()
