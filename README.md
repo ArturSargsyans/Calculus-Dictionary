@@ -48,4 +48,3 @@ USER STORIES
 
 As a user who wants to understand the definition of limit. I will open the application. Choose the chapter that I need. Then choose the 'definitions' criteria and find the definition that I need.
 
-As a user who wants to prepare for the exam I can enter the chapters covered and the app will give me the material that I should study again, with some aditional examples and problems.
